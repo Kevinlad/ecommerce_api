@@ -27,13 +27,12 @@ async function main() {
 
 
 
-
 //route 
-app.use('/api/v1/auth',require('../ecommerce-website/routes/authRoute.js'))
-app.use('/api/v1/user',require('../ecommerce-website/routes/userRoute.js'))
-app.use('/api/v1/resturant',require('../ecommerce-website/routes/resturantRoute.js'))
-app.use('/api/v1/category',require('../ecommerce-website/routes/categoryRoute.js'))
-app.use('/api/v1/foods',require('../ecommerce-website/routes/foodsRoute.js'))
+app.use('/api/v1/auth',require('./routes/authRoute.js'))
+app.use('/api/v1/user',require('./routes/userRoute.js'))
+app.use('/api/v1/resturant',require('./routes/resturantRoute.js'))
+app.use('/api/v1/category',require('./routes/categoryRoute.js'))
+app.use('/api/v1/foods',require('./routes/foodsRoute.js'))
 
 
 
