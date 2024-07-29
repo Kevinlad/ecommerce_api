@@ -18,7 +18,7 @@ app.use(morgan('dev'))
 // mongodb 
 //  connectedDb;
 async function main() {
-    await mongoose.connect('mongodb+srv://kevinlad819:SLaHzqIJ9Jxav8P1@ecommerce.dvi1jcy.mongodb.net/');
+    await mongoose.connect(process.env.MONGO_URL);
   }
   main().then((d)=>{
     console.log("connected");
@@ -29,7 +29,6 @@ async function main() {
 
 
 //route 
-app.use('/api/v1/test',require('../ecommerce-website/routes/testRoute'))
 app.use('/api/v1/auth',require('../ecommerce-website/routes/authRoute'))
 app.use('/api/v1/user',require('../ecommerce-website/routes/userRoute'))
 app.use('/api/v1/resturant',require('../ecommerce-website/routes/resturantRoute'))
@@ -43,7 +42,7 @@ app.get('/',(req,res)=>{
     return res.status(200).send("Welcome to eccomerce.")
 })
 
-const  PORT = process.env.PORT ||6000; 
+  PORT = process.env.PORT ||6000; 
 
 app.listen(PORT,()=>{
     console.log('Listening port = '+PORT)

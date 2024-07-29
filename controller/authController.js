@@ -1,7 +1,7 @@
 const userModel = require("../models/userModel");
 const { use } = require("../routes/testRoute");
 const bcrypt = require('bcryptjs');
-const JWT  =require('jsonwebtoken');
+const JWT  =require('jsonwebtoken');  
 
 registerController = async(req,res)=>{
     try{

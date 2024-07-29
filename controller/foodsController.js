@@ -121,7 +121,7 @@ const getSingleFoodController = async (req, res) => {
       if (!food) {
         return res.status(404).send({
           success: false,
-          message: "No Food Found with htis id",
+          message: "No Food Found with this id",
         });
       }
       res.status(200).send({
@@ -133,7 +133,7 @@ const getSingleFoodController = async (req, res) => {
       console.log(error);
       res.status(500).send({
         success: false,
-        message: "Error In get SIngle Food API",
+        message: "Error In get Single Food API",
         error,
       });
     }
