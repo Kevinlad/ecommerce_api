@@ -1,5 +1,5 @@
-const userModel = require("../models/userModel");
-const { use } = require("../routes/testRoute");
+const userModel = require("../models/userModel.js");
+const { use } = require("../routes/testRoute.js");
 const bcrypt = require('bcryptjs');
 const JWT  =require('jsonwebtoken');  
 

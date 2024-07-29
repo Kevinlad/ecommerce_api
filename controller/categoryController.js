@@ -1,6 +1,6 @@
-const categoryModels = require("../models/categoryModels");
-const { getAllResturant } = require("./resturantController");
-const { updateController } = require("./userController");
+const categoryModels = require("../models/categoryModels.js");
+const { getAllResturant } = require("./resturantController.js");
+const { updateController } = require("./userController.js");
 
 categoryController =  async(req,res)=>{
     try{

@@ -1,7 +1,7 @@
 const express = require('express');
-const authMiddleware = require('../middleware/authMiddleware');
-const { createFoodsController, getAllFoodsController, getSingleFoodController, getFoodByResturantController, updateFoodController, deleteFoodController, placeOrderController, orderStatusController } = require('../controller/foodsController');
-const adminMiddleware = require("../middleware/adminController");
+const authMiddleware = require('../middleware/authMiddleware.js');
+const { createFoodsController, getAllFoodsController, getSingleFoodController, getFoodByResturantController, updateFoodController, deleteFoodController, placeOrderController, orderStatusController } = require('../controller/foodsController.js');
+const adminMiddleware = require("../middleware/adminController.js");
 const router  = express.Router();
 
 // CREATE THE CATEGORY

@@ -1,5 +1,5 @@
-const foodModal = require("../models/foodModal");
-const orderModel = require("../models/orderModel");
+const foodModal = require("../models/foodModal.js");
+const orderModel = require("../models/orderModel.js");
 
 
 const createFoodsController = async (req, res) => {

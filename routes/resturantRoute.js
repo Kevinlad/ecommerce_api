@@ -1,7 +1,7 @@
 const express = require('express');
-const authMiddleware = require('../middleware/authMiddleware');
-const { createResturantController, getAllResturant, getResturantById, deleteResturantController } = require('../controller/resturantController');
-const { deleteProfileController } = require('../controller/userController');
+const authMiddleware = require('../middleware/authMiddleware.js');
+const { createResturantController, getAllResturant, getResturantById, deleteResturantController } = require('../controller/resturantController.js');
+const { deleteProfileController } = require('../controller/userController.js');
 
 const router  = express.Router();
 //CREATE RESTURANT || POST
