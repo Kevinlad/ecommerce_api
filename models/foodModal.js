@@ -37,6 +37,10 @@ const foodSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Resturant",
     },
+    categoryId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",
+    },
     rating: {
       type: Number,
       default: 5,

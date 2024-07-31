@@ -15,6 +15,7 @@ const createFoodsController = async (req, res) => {
         isAvailabe,
         resturnat,
         rating,
+        categoryId,
       } = req.body;
   
       if (!title || !description || !price || !resturnat) {
@@ -33,7 +34,7 @@ const createFoodsController = async (req, res) => {
         code,
         isAvailabe,
         resturnat,
-        rating,
+        rating,categoryId
       });
   
       await newFood.save();
@@ -127,6 +128,36 @@ const getSingleFoodController = async (req, res) => {
       res.status(200).send({
         success: true,
         message: "food base on restuatrn",
+        food,
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).send({
+        success: false,
+        message: "Error In get Single Food API",
+        error,
+      });
+    }
+  };
+  const getFoodBycategoryController = async (req, res) => {
+    try {
+      const cateoryId = req.params.id;
+      if (!cateoryId) {
+        return res.status(404).send({
+          success: false,
+          message: "please provide id",
+        });
+      }
+      const food = await foodModal.find({ categoryId: cateoryId });
+      if (!food) {
+        return res.status(404).send({
+          success: false,
+          message: "No Food Found with this id",
+        });
+      }
+      res.status(200).send({
+        success: true,
+        message: "food base on category",
         food,
       });
     } catch (error) {
@@ -294,4 +325,4 @@ const orderStatusController = async (req, res) => {
   }
 };
   
-module.exports = {createFoodsController,getAllFoodsController,getSingleFoodController,getFoodByResturantController,updateFoodController,deleteFoodController,placeOrderController,orderStatusController};
+module.exports = {createFoodsController,getAllFoodsController,getSingleFoodController,getFoodByResturantController,updateFoodController,deleteFoodController,placeOrderController,orderStatusController,getFoodBycategoryController};
