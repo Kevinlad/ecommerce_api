@@ -33,6 +33,8 @@ app.use('/api/v1/user',require('./routes/userRoute.js'))
 app.use('/api/v1/resturant',require('./routes/resturantRoute.js'))
 app.use('/api/v1/category',require('./routes/categoryRoute.js'))
 app.use('/api/v1/foods',require('./routes/foodsRoute.js'))
+app.use('/api/v1/cart',require('./routes/cartRoute.js'))
+
 
 
 
