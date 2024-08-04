@@ -1,5 +1,6 @@
 const foodModal = require("../models/foodModal.js");
 const orderModel = require("../models/orderModel.js");
+const resturantModel = require("../models/resturantModel.js");
 
 
 const createFoodsController = async (req, res) => {
@@ -314,6 +315,7 @@ const orderStatusController = async (req, res) => {
     res.status(200).send({
       success: true,
       message: "Order Status Updated",
+      order
     });
   } catch (error) {
     console.log(error);
@@ -324,5 +326,32 @@ const orderStatusController = async (req, res) => {
     });
   }
 };
+
+
+searchFunctionality =  async (req, res) => {
+  try {
+    const searchTerm = req.query.q;
+    if (!searchTerm) {
+        return res.status(400).json({ error: 'Search term is required' });
+    }
+
+    // Fetch all restaurants
+    const allRestaurants = await resturantModel.find().lean(); // Use lean() for better performance
+
+    // Filter restaurants that start with the search term (case-insensitive)
+    const filteredRestaurants = allRestaurants.filter(restaurant =>
+        restaurant.title.toLowerCase().startsWith(searchTerm.toLowerCase())
+    );
+
+    res.status(200).send({
+      success:true,
+      filteredRestaurants,
+      
+    })
+} catch (error) {
+  console.log(error); 
+    res.status(500).json({ error: error.message });
+}
+}
   
-module.exports = {createFoodsController,getAllFoodsController,getSingleFoodController,getFoodByResturantController,updateFoodController,deleteFoodController,placeOrderController,orderStatusController,getFoodBycategoryController};
+module.exports = {createFoodsController,getAllFoodsController,getSingleFoodController,getFoodByResturantController,updateFoodController,deleteFoodController,placeOrderController,orderStatusController,getFoodBycategoryController,searchFunctionality};
