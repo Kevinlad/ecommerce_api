@@ -1,7 +1,7 @@
 const Cart = require("../models/cartmodel.js");
 const Foods = require("../models/foodModal.js");
 
-
+const Order = require('../models/placeorderModel.js');
 const addtocart = async (req, res) => {
   const { userId, items } = req.body;
 
@@ -75,6 +75,54 @@ getCartItem = async (req, res) => {
   }
 }
 
+const addOrder = async (req, res) => {
+  const { userId } = req.body;
+
+  try {
+    // Fetch the cart for the user
+    const cart = await Cart.findOne({ userId }).populate('items.foodId');
+
+    if (!cart || cart.items.length === 0) {
+      return res.status(400).send({ message: 'Cart is empty' });
+    }
+
+    // Create a new order
+    const order = new Order({
+      userId: cart.userId,
+      items: cart.items,
+      totalOrderPrice: cart.totalCartPrice,
+    });
+
+    // Save the order
+    await order.save();
+
+    // Clear the cart after order is placed
+    cart.items = [];
+    cart.totalCartPrice = 0;
+    await cart.save();
+
+    res.status(200).send(order);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error);
+  }
+};
+const getUserOrders = async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const orders = await Order.find({ userId }).populate('items.foodId');
+
+    if (!orders || orders.length === 0) {
+      return res.status(404).send({ message: 'No orders found for this user' });
+    }
+
+    res.status(200).send(orders);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error);
+  }
+};
 
 
-module.exports = {addtocart,getCartItem};
+module.exports = {addtocart,getCartItem,addOrder,getUserOrders};
