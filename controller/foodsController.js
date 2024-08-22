@@ -353,5 +353,37 @@ searchFunctionality =  async (req, res) => {
     res.status(500).json({ error: error.message });
 }
 }
-  
-module.exports = {createFoodsController,getAllFoodsController,getSingleFoodController,getFoodByResturantController,updateFoodController,deleteFoodController,placeOrderController,orderStatusController,getFoodBycategoryController,searchFunctionality};
+const getFoodByController = async (req, res) => {
+  try {
+    const foodId = req.params.id;
+    if (!foodId) {
+      return res.status(400).send({
+        success: false,
+        message: "Please provide a valid food ID",
+      });
+    }
+
+    const food = await foodModal.findOne({ _id: foodId });
+    if (!food) {
+      return res.status(404).send({
+        success: false,
+        message: "No Food Found with this ID",
+      });
+    }
+
+    res.status(200).send({
+      success: true,
+      message: "Food details retrieved successfully",
+      food,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      success: false,
+      message: "Error in getting food details",
+      error,
+    });
+  }
+};
+
+module.exports = {createFoodsController,getFoodByController,getAllFoodsController,getSingleFoodController,getFoodByResturantController,updateFoodController,deleteFoodController,placeOrderController,orderStatusController,getFoodBycategoryController,searchFunctionality};

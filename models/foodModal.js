@@ -50,6 +50,10 @@ const foodSchema = new mongoose.Schema(
     ratingCount: {
       type: String,
     },
+    foodid:{
+      type: mongoose.Schema.Types.ObjectId,
+      ref:"Foods"
+    }
   },
   { timestamps: true }
 );

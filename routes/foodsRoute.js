@@ -1,6 +1,6 @@
 const express = require('express');
 const authMiddleware = require('../middleware/authMiddleware.js');
-const { createFoodsController, getAllFoodsController, getSingleFoodController, getFoodByResturantController, updateFoodController, deleteFoodController, placeOrderController, orderStatusController, getFoodBycategoryController, searchFunctionality } = require('../controller/foodsController.js');
+const { createFoodsController, getAllFoodsController, getSingleFoodController, getFoodByResturantController, updateFoodController, deleteFoodController, placeOrderController, orderStatusController, getFoodBycategoryController, searchFunctionality, getFoodByController } = require('../controller/foodsController.js');
 const adminMiddleware = require("../middleware/adminController.js");
 const router  = express.Router();
 
@@ -37,6 +37,8 @@ router.post(
   );
 
 router.get("/getfoodcategory/:id",getFoodBycategoryController); 
+router.get("/getfood/:id",getFoodByController); 
+
 
 
 router.get('/search',searchFunctionality)
